@@ -20,6 +20,7 @@
   "homepage": "https://github.com/GeorgeSemenov/webpackNew#readme",
   "devDependencies": {
     "html-webpack-plugin": "^5.5.0",
+    "http-server": "^14.1.0",
     "webpack": "^5.71.0",
     "webpack-cli": "^4.9.2"
   }

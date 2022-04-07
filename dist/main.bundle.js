@@ -1,1 +1,1 @@
-console.log("hello");
+(()=>{const e=document.createElement("h1");e.textContent="Ты чо, собака?",document.querySelector("#root").append(e)})();
