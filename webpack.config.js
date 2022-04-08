@@ -1,26 +1,33 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const {CleanWebpackPlugin} = require('clean-webpack-plugin')
+const devserver = require('./webpackConfig/devserver')
+// const merge = require('webpack-merge')
 
-module.exports = {
-    entry: {
-        main: path.resolve(__dirname, './src/index.js'),
-    },
-    output: {
-        path: path.resolve(__dirname, './dist'),
-        filename: '[name].bundle.js',
-    },
-    plugins: [
-        new HtmlWebpackPlugin({
-            title: 'webpack Boilerplate',
-            template: path.resolve(__dirname, './src/template.html'), // шаблон
-            filename: 'index.html', // название выходного файла
-        }),
-    ],
-    devServer: {
-        static: {
-          directory: path.join(__dirname, 'dist'),
+module.exports = Object.assign({},
+    {
+        entry: {
+            main: path.resolve(__dirname, './src/index.js'),
         },
-        compress: true,
-        port: 9000,
-      },
-}
+        output: {
+            path: path.resolve(__dirname, './dist'),
+            filename: '[name].bundle.js',
+        },
+        plugins: [
+            new CleanWebpackPlugin(),
+            new HtmlWebpackPlugin({
+                title: 'webpack Boilerplate',
+                template: path.resolve(__dirname, './src/template.html'), // шаблон
+                filename: 'index.html', // название выходного файла
+            }),
+        ],
+        // devServer: {
+        //     static: {
+        //       directory: path.join(__dirname, 'dist'),
+        //     },
+        //     compress: true,
+        //     port: 9000,
+        // },
+    },
+    devserver()
+)
