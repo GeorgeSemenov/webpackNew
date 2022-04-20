@@ -21,13 +21,6 @@ module.exports = Object.assign({},
                 filename: 'index.html', // название выходного файла
             }),
         ],
-        // devServer: {
-        //     static: {
-        //       directory: path.join(__dirname, 'dist'),
-        //     },
-        //     compress: true,
-        //     port: 9000,
-        // },
     },
     devserver()
 )
