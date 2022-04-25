@@ -1,0 +1,2 @@
+https://www.youtube.com/watch?v=gVenbqg9Rww&ab_channel=GrandpaJS
+тут всё разжёванно, просто и понятно, к тому же используется pug и scss .
