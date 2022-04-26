@@ -1,0 +1,4 @@
+Проект отсюда.
+https://habr.com/ru/post/524260/
+
+npx http-server ./dist
