@@ -4,14 +4,21 @@ const devserver = require('./webpackConfig/devserver')
 const extractCss = require('mini-css-extract-plugin')
 // const merge = require('webpack-merge')
 
+const pages = [//Моссив страниц
+            `index`,
+            ];
 
 module.exports = function(env, argv){
     console.log(`Знаешь ли ты что mode = ${argv.mode}`);
     return Object.assign({},
         {
-            entry: {
-                main: path.resolve(__dirname, './src/index.js'),
-            },
+            entry: pages.reduce((config,page)=>{//reduce перебирает все значения массива и в каждой итерации может использовать значение из предыдущей итерации. Возвращает массив.
+                config[page] = `./src/pages/${page}/${page}.js`;
+                return config;
+            },{}),//вторым аргументом reduce является первоначальной значение т.е. изначально config = {}, а затем этот объект наполняется свойствами, которые содержат адреса страниц
+            // entry: { // Это старая конфигурация, для одной странички
+            //     main: path.resolve(__dirname, './src/index.js'),
+            // },
             output: {
                 path: path.resolve(__dirname, './dist'),
                 filename: '[name].bundle.js',
@@ -23,13 +30,23 @@ module.exports = function(env, argv){
                 new extractCss({
                     filename: '[name].[contenthash].css',//Теперь генерируемый файл стилей будет иметь в названии хэш, чтобы не подвергаться кэшированию браузером клиента.
                 }),
-                new HtmlWebpackPlugin({
-                    title: 'webpack Boilerplate',
-                    // template: path.resolve(__dirname, './src/template.html'), // шаблон
-                    template: path.resolve(__dirname, './src/index.pug'), // шаблон
-                    filename: 'index.html', // название выходного файла
-                }),
-            ],
+                // new HtmlWebpackPlugin({//Старая конфигурация для одной странички
+                //     title: 'webpack Boilerplate',
+                //     // template: path.resolve(__dirname, './src/template.html'), // шаблон
+                //     template: path.resolve(__dirname, './src/index.pug'), // шаблон
+                //     filename: 'index.html', // название выходного файла
+                // }),
+            ].concat(
+                pages.map(
+                        (page)=>{
+                            new HtmlWebpackPlugin({
+                                template:  `./src/pages/${page}.pug`,
+                                filename:  `${page}.html`,
+                                chunks: [page],
+                            })
+                        }
+                    )
+                ),
             module: {
                 rules: [
                     {
