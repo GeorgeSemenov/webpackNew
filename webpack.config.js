@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const devserver = require('./webpackConfig/devserver')
 const extractCss = require('mini-css-extract-plugin')
 // const merge = require('webpack-merge')
-
+//Информацию о настройке многостраничности брал отсюда : https://dev.to/marcinwosinek/tutorial-for-building-multipage-website-with-webpack-4gdk
 const pages = [//Моссив страниц
             `index`,
             `about-bomj`,
