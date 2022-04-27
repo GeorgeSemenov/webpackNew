@@ -6,6 +6,7 @@ const extractCss = require('mini-css-extract-plugin')
 
 const pages = [//Моссив страниц
             `index`,
+            `about-bomj`,
             ];
 
 module.exports = function(env, argv){
@@ -39,10 +40,10 @@ module.exports = function(env, argv){
             ].concat(
                 pages.map(
                         (page)=>{
-                            new HtmlWebpackPlugin({
-                                template:  `./src/pages/${page}.pug`,
+                            return new HtmlWebpackPlugin({
+                                template:  `./src/pages/${page}/${page}.pug`,
                                 filename:  `${page}.html`,
-                                chunks: [page],
+                                chunks: [page],//Эта запись выбирает повторяющиеся зависимости из файлов и выписывает его в отдельный файл
                             })
                         }
                     )
